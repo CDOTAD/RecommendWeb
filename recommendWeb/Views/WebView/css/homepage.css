@@ -1,0 +1,24 @@
+﻿body {
+}
+
+.sub-introduce{
+    height:100px;
+}
+
+.sys-sub-title{
+    height:100px;
+    margin-left:62%;
+    margin-top:50px;
+    font-size:20px;
+}
+
+.sys-title{
+    /*height:38%;*/
+    text-align:center;
+    font-family:'Adobe Fan Heiti Std';
+    font-size:50px;
+}
+
+.sys-header{
+    height:300px;
+}
