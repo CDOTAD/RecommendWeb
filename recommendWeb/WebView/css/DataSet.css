@@ -1,0 +1,6 @@
+﻿body {
+}
+
+#btn-user-viewmore,#btn-movie-viewmore,#btn-rating-viewmore{
+    float:right;
+}

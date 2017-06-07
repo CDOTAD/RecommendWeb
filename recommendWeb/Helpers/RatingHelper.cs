@@ -151,5 +151,50 @@ namespace recommendWeb.Helpers
 
             return ratingList;
         }
+
+        public static ArrayList GetLimitRating()
+        {
+            ArrayList limitRating = new ArrayList();
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+
+            string sqlStr =
+                @"select * from rating limit 15";
+
+            mySqlCommand.CommandText = sqlStr;
+
+            mySqlCommand.Connection.Open();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        Rating rating = new Rating();
+                        rating.UserId = reader.GetInt32(0);
+                        rating.MovieId = reader.GetInt32(1);
+                        rating.Rate = reader.GetFloat(2);
+                        int tiemStamp = reader.GetInt32(3);
+                        rating.TimeStamp = GetTime(Convert.ToString(tiemStamp));
+
+                        limitRating.Add(rating);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Close();
+            }
+
+            return limitRating;
+        }
     }
 }

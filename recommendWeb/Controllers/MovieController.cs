@@ -59,5 +59,27 @@ namespace recommendWeb.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Movie/GetLimit")]
+        public HttpResponseMessage GetLimit()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try
+            {
+                ArrayList movieList = MovieHelper.GetLimitMovie();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(movieList));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+        }
     }
 }

@@ -88,5 +88,46 @@ namespace recommendWeb.Helpers
 
             return user;
         }
+
+        public static ArrayList GetUserLimit()
+        {
+            ArrayList limitUser = new ArrayList();
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+
+            string sqlStr =
+                @"select * from user limit 15";
+
+            mySqlCommand.CommandText = sqlStr;
+
+            mySqlCommand.Connection.Open();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        User user = new User();
+                        user.UserId = reader.GetInt32(0);
+
+                        limitUser.Add(user);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Close();
+            }
+
+            return limitUser;
+        }
     }
 }

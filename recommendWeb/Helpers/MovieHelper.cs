@@ -90,5 +90,48 @@ namespace recommendWeb.Helpers
 
             return movie;
         }
+
+        public static ArrayList GetLimitMovie()
+        {
+            ArrayList limitMovie = new ArrayList();
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+
+            string sqlStr =
+                @"select * from movie limit 15";
+
+            mySqlCommand.CommandText = sqlStr;
+
+            mySqlCommand.Connection.Open();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        Movie movie = new Movie();
+                        movie.MovieId = reader.GetInt32(0);
+                        movie.Title = reader.GetString(1);
+                        movie.Genres = reader.GetString(2);
+
+                        limitMovie.Add(movie);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Close();
+            }
+
+            return limitMovie;
+        }
     }
 }

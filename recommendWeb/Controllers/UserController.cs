@@ -60,6 +60,28 @@ namespace recommendWeb.Controllers
 
         }
 
+        [HttpGet]
+        [Route("api/User/GetLimit")]
+        public HttpResponseMessage GetUserLimit()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try
+            {
+                ArrayList userList = UserHelper.GetUserLimit();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(userList));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+        }
        
     }
 }

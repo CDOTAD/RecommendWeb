@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../../Content/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../css/homepage.css" />
+    <link rel="stylesheet" href="../../css/DataSet.css" />
+    <script src="../../../Scripts/jquery-1.10.2.min.js"></script>
+    <script src="../../../Scripts/bootstrap.min.js"></script>
+    <title>DataSet</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    this is DataSet page
+    
+
+    <div class="col-lg-12 sys-header">
+        <p class="sys-title">Data Set</p>
+
+    </div>
+
+    
+    <div>
+
+        <div class="col-lg-1" >
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>User Id</th>
+                    </tr>
+                </thead>
+                <tbody id="user-info">
+
+                </tbody>
+
+            </table>
+            <button type="button" class="btn btn-primary" id="btn-user-viewmore">View More</button>
+        </div>
+
+        <div class="col-lg-6" >
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-sm-1">MovieId</th>
+                        <th class="col-sm-6">Title</th>
+                        <th class="col-sm-4">Genres</th>
+                    </tr>
+                </thead>
+                <tbody id="movie-info">
+
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-primary" id="btn-movie-viewmore">View More</button>
+        </div>
+
+        <div class="col-lg-5" >
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>User Id</th>
+                        <th>Movie Id</th>
+                        <th>Rating</th>
+                        <th>TimeStamp</th>
+                    </tr>
+                </thead>
+                <tbody id="rating-info">
+
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary" id="btn-rating-viewmore">View More</button>
+        </div>
+
+    </div>
+
+<script src="../../script/DataSet/DataSetJs.js"></script>
+</body>
+</html>

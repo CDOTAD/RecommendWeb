@@ -80,5 +80,29 @@ namespace recommendWeb.Controllers
                 return response;
             }
         }
+
+        [HttpGet]
+        [Route("api/Rating/GetLimit")]
+        public HttpResponseMessage GetLimit()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try
+            {
+                ArrayList ratingList = RatingHelper.GetLimitRating();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(ratingList));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+
+        }
     }
 }
