@@ -104,5 +104,73 @@ namespace recommendWeb.Controllers
             }
 
         }
+
+        [HttpGet]
+        [Route("api/Rating/GetTotal")]
+        public HttpResponseMessage GetTotal()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try
+            {
+                int ratingTotal = RatingHelper.GetRatingTotal();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(ratingTotal));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+
+        }
+
+        [HttpGet]
+        [Route("api/Rating/GroupLengthsByUser")]
+        public HttpResponseMessage GetGroupLengthsByUser()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                ArrayList groupList = RatingHelper.GetGroupLengthsByUser();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(groupList));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+        }
+        
+        [HttpGet]
+        [Route("api/Rating/GroupLengthsByMovie")]
+        public HttpResponseMessage GetGroupLenghtsByMovie()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                ArrayList groupList = RatingHelper.GetGroupLengthsByMovie();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(groupList));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+            }
+            catch(Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+        }
     }
 }

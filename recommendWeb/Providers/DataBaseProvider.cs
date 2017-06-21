@@ -5,19 +5,16 @@ namespace recommendWeb.Providers
 {
     public class DataBaseProvider
     {
-        private static readonly DataBaseProvider instance = new DataBaseProvider();
+        
 
-        public MySqlConnection mySqlConn = null;
+       
 
-        private DataBaseProvider()
+        static public MySqlConnection  getConnection()
         {
-            mySqlConn = new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString);
+            return new MySqlConnection(ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString);
 
         }
 
-        public static DataBaseProvider getInstance()
-        {
-            return instance;
-        }
+        
     }
 }

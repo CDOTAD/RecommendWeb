@@ -13,7 +13,7 @@ namespace recommendWeb.Helpers
             ArrayList allUser = new ArrayList();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
 
             string sqlStr =
@@ -21,7 +21,7 @@ namespace recommendWeb.Helpers
 
             mySqlCommand.CommandText = sqlStr;
 
-            mySqlCommand.Connection.Open();
+            mySqlCommand.Connection.OpenAsync();
 
             MySqlDataReader reader = mySqlCommand.ExecuteReader();
 
@@ -44,7 +44,7 @@ namespace recommendWeb.Helpers
             }
             finally
             {
-                mySqlCommand.Connection.Close();
+                mySqlCommand.Connection.CloseAsync();
             }
 
             return allUser;
@@ -56,7 +56,7 @@ namespace recommendWeb.Helpers
             User user = new User();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
             string sqlStr =
                 @"select * from user where userId = ?us_id";
@@ -94,7 +94,7 @@ namespace recommendWeb.Helpers
             ArrayList limitUser = new ArrayList();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
             string sqlStr =
                 @"select * from user limit 15";
@@ -128,6 +128,46 @@ namespace recommendWeb.Helpers
             }
 
             return limitUser;
+        }
+
+        public static int GetUserTotal()
+        {
+            int userTotal = 0;
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+
+            string sqlStr =
+                @"select count(*) from user";
+
+            mySqlCommand.CommandText = sqlStr;
+
+            mySqlCommand.Connection.Open();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        userTotal = reader.GetInt32(0);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Close();
+            }
+
+            return userTotal;
+
+
         }
     }
 }

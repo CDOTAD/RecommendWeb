@@ -82,6 +82,29 @@ namespace recommendWeb.Controllers
                 return response;
             }
         }
+
+        [HttpGet]
+        [Route("api/User/GetTotal")]
+        public HttpResponseMessage GetTotal()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try
+            {
+                int userTotal = UserHelper.GetUserTotal();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(userTotal));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+            }
+            catch(Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+        }
        
     }
 }

@@ -13,7 +13,7 @@ namespace recommendWeb.Helpers
             ArrayList allMovie = new ArrayList();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
             string sqlStr =
                 @"select * from movie";
@@ -56,7 +56,7 @@ namespace recommendWeb.Helpers
             Movie movie = new Movie();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
             string sqlStr =
                 @"select * from movie where movieId = ?mv_id";
@@ -96,7 +96,9 @@ namespace recommendWeb.Helpers
             ArrayList limitMovie = new ArrayList();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+
+            //mySqlCommand.Connection.CreateCommand
 
             string sqlStr =
                 @"select * from movie limit 15";
@@ -132,6 +134,47 @@ namespace recommendWeb.Helpers
             }
 
             return limitMovie;
+        }
+
+        public static int GetMovieTotal()
+        {
+
+            int movieTotal = 0;
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+
+            string sqlStr =
+                @"select count(*) from movie";
+
+            mySqlCommand.CommandText = sqlStr;
+
+            mySqlCommand.Connection.Open();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while(reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        movieTotal = reader.GetInt32(0);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Clone();
+            }
+
+            return movieTotal;
+
+
         }
     }
 }

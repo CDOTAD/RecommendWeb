@@ -7,7 +7,7 @@ using System.Web.Http;
 using System.Collections;
 using recommendWeb.Providers;
 using recommendWeb.Helpers;
-using recommendWeb.Models;
+
 
 namespace recommendWeb.Controllers
 {
@@ -54,6 +54,30 @@ namespace recommendWeb.Controllers
                 return response;
             }
             catch(Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+
+        }
+
+        [HttpGet]
+        [Route("api/Recommend/GetRecommend")]
+        public HttpResponseMessage GetRecommend()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try
+            {
+                ArrayList recommendList = RecommendHelper.getRecommend();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(recommendList));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+            }
+            catch (Exception e)
             {
                 response.Content = new StringContent(e.StackTrace);
                 response.StatusCode = HttpStatusCode.NotFound;

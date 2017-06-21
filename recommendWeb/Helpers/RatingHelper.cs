@@ -24,7 +24,7 @@ namespace recommendWeb.Helpers
             ArrayList allRating = new ArrayList();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
             string sqlStr =
                 @"select * from rating";
@@ -69,7 +69,7 @@ namespace recommendWeb.Helpers
             ArrayList ratingList = new ArrayList();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
             string sqlStr =
                 @"select * from rating where userId = ?us_id";
@@ -113,7 +113,7 @@ namespace recommendWeb.Helpers
             ArrayList ratingList = new ArrayList();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
             string sqlStr =
                 @"select * from rating where movieId = ?mv_id";
@@ -157,8 +157,8 @@ namespace recommendWeb.Helpers
             ArrayList limitRating = new ArrayList();
 
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
-
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+            
             string sqlStr =
                 @"select * from rating limit 15";
 
@@ -195,6 +195,129 @@ namespace recommendWeb.Helpers
             }
 
             return limitRating;
+        }
+
+        public static int GetRatingTotal()
+        {
+            int ratingTotal = 0;
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+
+            string sqlStr =
+                @"select count(*) from rating";
+
+            mySqlCommand.CommandText = sqlStr;
+
+            mySqlCommand.Connection.Open();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        ratingTotal = reader.GetInt32(0);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Close();
+            }
+
+            return ratingTotal;
+        }
+
+        public static ArrayList GetGroupLengthsByUser()
+        {
+            ArrayList groupLength = new ArrayList();
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+
+            string sqlStr =
+                @"select count(*),userId from rating group by userId";
+
+            mySqlCommand.CommandText = sqlStr;
+
+            mySqlCommand.Connection.Open();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        UserGroup userGroup = new UserGroup();
+                        userGroup.GroupLength = reader.GetInt32(0);
+                        userGroup.UserId = reader.GetInt32(1);
+
+                        groupLength.Add(userGroup);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Close();
+            }
+
+            return groupLength;
+        }
+
+        public static ArrayList GetGroupLengthsByMovie()
+        {
+            ArrayList groupLength = new ArrayList();
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+
+            string sqlStr =
+                @"select count(*),movieId from rating group by movieId";
+
+            mySqlCommand.Connection.Open();
+
+            mySqlCommand.CommandText = sqlStr;
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        MovieGroup movieGroup = new MovieGroup();
+
+                        movieGroup.GroupLength = reader.GetInt32(0);
+                        movieGroup.MovieId = reader.GetInt32(0);
+
+                        groupLength.Add(movieGroup);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Close();
+            }
+
+            return groupLength;
         }
     }
 }

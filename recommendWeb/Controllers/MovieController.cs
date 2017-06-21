@@ -81,5 +81,29 @@ namespace recommendWeb.Controllers
                 return response;
             }
         }
+
+        [HttpGet]
+        [Route("api/Movie/GetTotal")]
+        public HttpResponseMessage GetTotal()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+
+            try
+            {
+                int movieTotal = MovieHelper.GetMovieTotal();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(movieTotal));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+
+            }
+            catch(Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+        }
     }
 }

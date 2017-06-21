@@ -19,8 +19,6 @@ namespace recommendWeb
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            System.Data.Entity.Database.SetInitializer(
-                new recommendWeb.Models.OrdersContextInitializer());
         }
     }
 }

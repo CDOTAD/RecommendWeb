@@ -12,6 +12,7 @@ using IronPython.Hosting;
 using IronPython.Runtime;
 using Microsoft.Scripting.Hosting;
 
+
 namespace recommendWeb.Helpers
 {
     /// <summary>
@@ -118,6 +119,55 @@ namespace recommendWeb.Helpers
             IronPython.Runtime.List result = pyScript.recommend_item_cf(user_item_list,similar_matrix,3);
 
             return getRecommendMovie(result);
+        }
+
+
+        public static ArrayList getRecommend()
+        {
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+
+            string sqlStr =
+                @"select * from recommender";
+
+            mySqlCommand.CommandText = sqlStr;
+            mySqlCommand.Connection.OpenAsync();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            ArrayList recommendList = new ArrayList();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        int userId = reader.GetInt32(0);
+                        string userCF = reader.GetString(1);
+                        string itemCF = reader.GetString(2);
+
+                        Recommend recommend = new Recommend();
+                        recommend.UserId = userId;
+                        recommend.UserCF = userCF;
+                        recommend.ItemCF = itemCF;
+
+                        recommendList.Add(recommend);
+
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.CloseAsync();
+            }
+
+            return recommendList;
+
         }
 
         /// <summary>
@@ -242,13 +292,13 @@ namespace recommendWeb.Helpers
         private static PythonDictionary getUserItem(int user_id)
         {
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
             string sqlStr =
                 @"select userId,movieId from rating";
 
             mySqlCommand.CommandText = sqlStr;
-            mySqlCommand.Connection.Open();
+            mySqlCommand.Connection.OpenAsync();
 
             MySqlDataReader reader = mySqlCommand.ExecuteReader();
 
@@ -279,7 +329,7 @@ namespace recommendWeb.Helpers
             }
             finally
             {
-                mySqlCommand.Connection.Close();
+                mySqlCommand.Connection.CloseAsync();
             }
 
             return pyDic;
@@ -293,7 +343,7 @@ namespace recommendWeb.Helpers
         private static IronPython.Runtime.List getUserLikeItem(int user_id)
         {
             MySqlCommand mySqlCommand = new MySqlCommand();
-            mySqlCommand.Connection = DataBaseProvider.getInstance().mySqlConn;
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
 
             string sqlStr =
                 @"select movieId from rating where userId = ?us_id";
@@ -301,7 +351,7 @@ namespace recommendWeb.Helpers
             mySqlCommand.CommandText = sqlStr;
             mySqlCommand.Parameters.AddWithValue("?us_id", user_id);
 
-            mySqlCommand.Connection.Open();
+            mySqlCommand.Connection.OpenAsync();
 
             MySqlDataReader reader = mySqlCommand.ExecuteReader();
 
@@ -323,7 +373,7 @@ namespace recommendWeb.Helpers
             }
             finally
             {
-                mySqlCommand.Connection.Close();
+                mySqlCommand.Connection.CloseAsync();
             }
 
             return pyItemList;
