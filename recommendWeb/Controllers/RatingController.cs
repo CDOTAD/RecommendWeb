@@ -201,21 +201,21 @@ namespace recommendWeb.Controllers
         public HttpResponseMessage GetTopMovieGroupLengths()
         {
             HttpResponseMessage response = new HttpResponseMessage();
-            try
-            {
+            //try
+            //{
                 ArrayList topList = RatingHelper.GetTopMovieGroup();
                 response.Content = new StringContent(JsonObjectConverter.ObjectToJson(topList));
                 response.StatusCode = HttpStatusCode.OK;
 
                 return response;
-            }
-            catch(Exception e)
-            {
-                response.Content = new StringContent(e.StackTrace);
-                response.StatusCode = HttpStatusCode.NotFound;
+            //}
+            //catch(Exception e)
+            //{
+            //    response.Content = new StringContent(e.StackTrace);
+            //    response.StatusCode = HttpStatusCode.NotFound;
 
-                return response;
-            }
+            //    return response;
+            //}
         }
     }
 }

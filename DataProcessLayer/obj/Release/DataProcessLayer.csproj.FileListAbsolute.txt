@@ -10,3 +10,5 @@ D:\projects\recommendWeb\RecommendWeb\DataProcessLayer\bin\Release\DataModel.pdb
 D:\projects\recommendWeb\RecommendWeb\DataProcessLayer\bin\Release\Newtonsoft.Json.xml
 D:\projects\recommendWeb\RecommendWeb\DataProcessLayer\bin\Release\EntityFramework.xml
 D:\projects\recommendWeb\RecommendWeb\DataProcessLayer\bin\Release\zh-Hans\EntityFramework.resources.dll
+D:\projects\recommendWeb\RecommendWeb\DataProcessLayer\obj\Release\Interop.FirstComLib.dll
+D:\projects\recommendWeb\RecommendWeb\DataProcessLayer\obj\Release\DataProcessLayer.csproj.ResolveComReference.cache

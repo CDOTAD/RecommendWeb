@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataModel.ViewModel;
+using DataProcessLayer.CppInvoke;
+using FirstComLib;
 
 namespace DataProcessLayer
 {
@@ -32,13 +34,13 @@ namespace DataProcessLayer
 
                 while ((groupList[high] as Group).GroupLength <= (key as Group).GroupLength && high > low)
                 {
-                    --high;
+                    high = CPPDLL.Sub(high, 1);
                 }
                 groupList[low] = groupList[high];
 
                 while ((groupList[low] as Group).GroupLength > (key as Group).GroupLength && high > low)
                 {
-                    ++low;
+                    low = CPPDLL.Add(low, 1);
                 }
 
                 groupList[high] = groupList[low];
@@ -57,7 +59,10 @@ namespace DataProcessLayer
             int index = sortUnit(groupList, low, high);
 
             sort(groupList, low, index - 1);
-            sort(groupList, index + 1, high);
+
+            FirstClass f = new FirstClass();
+
+            sort(groupList, f.Add(index, 1), high);
         }
     }
 }
