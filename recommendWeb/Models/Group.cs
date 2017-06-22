@@ -5,9 +5,9 @@ using System.Web;
 
 namespace recommendWeb.Models
 {
-    public class MovieGroup
+    public class Group
     {
-        public int MovieId { get; set; }
+        public int Id { get; set; }
         public int GroupLength { get; set; }
     }
 }

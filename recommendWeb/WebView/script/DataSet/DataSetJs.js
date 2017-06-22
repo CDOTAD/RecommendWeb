@@ -1,6 +1,10 @@
 ﻿
 $(document).ready(function () {
 
+    $("#btn-rating-viewmore").click(function () {
+        window.location.href = 'RatingSet.html';
+    });
+
     /*$.getJSON('../../../api/User/GetLimit')*/
 
     $.getJSON('../../../api/User/GetLimit')
@@ -183,7 +187,7 @@ $(document).ready(function () {
                 series:[{
                     name: '整体数据',
                     type: 'pie',
-                    radius: 200,
+                    radius: 150,
                     center: ['50%', '50%'],
                     itemStyle:showConfig,
                     data: [
@@ -204,7 +208,7 @@ $(document).ready(function () {
             var len = 20;
             while (len--) {
                 userGroup.push({
-                    name: data[len].UserId,
+                    name: data[len].Id,
                     value:data[len].GroupLength
                 })
             }
@@ -216,7 +220,8 @@ $(document).ready(function () {
                 series: [{
                     name: 'user',
                     type: 'pie',
-                    radius: 150,
+                    radius: [20, 150],
+                    //roseType:'radius',
                     itemStyle:showConfig,
                     center:['50%','50%'],
                     data: userGroup
@@ -236,7 +241,7 @@ $(document).ready(function () {
             var len = 20;
             while (len--) {
                 userGroup.push({
-                    name: data[len].MovieId,
+                    name: data[len].Id,
                     value: data[len].GroupLength
                 })
             }
@@ -258,6 +263,7 @@ $(document).ready(function () {
             });
 
         });
+
 
 });
 

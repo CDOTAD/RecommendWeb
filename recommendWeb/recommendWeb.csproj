@@ -278,6 +278,7 @@
     <Compile Include="Controllers\RatingController.cs" />
     <Compile Include="Controllers\RecommendController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DataProcressers\GroupDataProcesser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -286,14 +287,13 @@
     <Compile Include="Helpers\RecommendHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Movie.cs" />
-    <Compile Include="Models\MovieGroup.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Recommend.cs" />
     <Compile Include="Models\RecommendMovie.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\DataBaseProvider.cs" />
@@ -351,10 +351,12 @@
     <Content Include="WebView\css\DataSet.css" />
     <Content Include="WebView\css\homepage.css" />
     <Content Include="WebView\html\DataSet\DataSet.html" />
+    <Content Include="WebView\html\DataSet\RatingSet.html" />
     <Content Include="WebView\html\homepage.html" />
     <Content Include="WebView\html\ItemCF\ItemCF.html" />
     <Content Include="WebView\html\UserCF\UserCF.html" />
     <Content Include="WebView\script\DataSet\DataSetJs.js" />
+    <Content Include="WebView\script\DataSet\RatingSet.js" />
     <Content Include="WebView\script\homepagejs.js" />
     <Content Include="WebView\script\UserCF\UserCFjs.js" />
     <Content Include="Web.config" />
@@ -386,6 +388,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataIteraction\DataIteraction.csproj">
+      <Project>{88cd0c24-da70-4067-b748-693c4bb8a227}</Project>
+      <Name>DataIteraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataModel\DataModel.csproj">
+      <Project>{7c368362-6e84-4cdc-a9ee-c4fdfd157437}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataProcessLayer\DataProcessLayer.csproj">
+      <Project>{4898c48c-cdd2-496c-8825-c3c3aa8cf6cc}</Project>
+      <Name>DataProcessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

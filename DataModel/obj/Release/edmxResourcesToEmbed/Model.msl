@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="recommendsystemModelStoreContainer" CdmEntityContainer="recommendsystemEntities">
+    <EntitySetMapping Name="movie">
+      <EntityTypeMapping TypeName="recommendsystemModel.movie">
+        <MappingFragment StoreEntitySet="movie">
+          <ScalarProperty Name="movieId" ColumnName="movieId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="genres" ColumnName="genres" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rating">
+      <EntityTypeMapping TypeName="recommendsystemModel.rating">
+        <MappingFragment StoreEntitySet="rating">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="movieId" ColumnName="movieId" />
+          <ScalarProperty Name="rating1" ColumnName="rating" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="recommender">
+      <EntityTypeMapping TypeName="recommendsystemModel.recommender">
+        <MappingFragment StoreEntitySet="recommender">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user">
+      <EntityTypeMapping TypeName="recommendsystemModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="userId" ColumnName="userId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

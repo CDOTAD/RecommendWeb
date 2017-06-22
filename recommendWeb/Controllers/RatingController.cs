@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Collections;
-using recommendWeb.Helpers;
+using DataIteraction;
 using recommendWeb.Providers;
 
 
@@ -160,6 +160,51 @@ namespace recommendWeb.Controllers
             {
                 ArrayList groupList = RatingHelper.GetGroupLengthsByMovie();
                 response.Content = new StringContent(JsonObjectConverter.ObjectToJson(groupList));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+            }
+            catch(Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+        }
+
+        [HttpGet]
+        [Route("api/Rating/GroupLenthsTopUser")]
+        public HttpResponseMessage GetTopUserGroupLenths()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                ArrayList topList = RatingHelper.GetTopUserGroup();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(topList));
+                response.StatusCode = HttpStatusCode.OK;
+
+                return response;
+
+            }
+            catch(Exception e)
+            {
+                response.Content = new StringContent(e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
+
+                return response;
+            }
+
+        }
+        [HttpGet]
+        [Route("api/Rating/GroupLengthsTopMovie")]
+        public HttpResponseMessage GetTopMovieGroupLengths()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            try
+            {
+                ArrayList topList = RatingHelper.GetTopMovieGroup();
+                response.Content = new StringContent(JsonObjectConverter.ObjectToJson(topList));
                 response.StatusCode = HttpStatusCode.OK;
 
                 return response;

@@ -27,11 +27,7 @@ namespace recommendWeb
             );
 
 
-            config.Routes.MapHttpRoute(
-                name: "UserApi",
-                routeTemplate: "api/{controller}/id",
-                defaults: new { id = RouteParameter.Optional }
-            );
+           
             
             //New code:
             //

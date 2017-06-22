@@ -3,7 +3,7 @@ using recommendWeb.Models;
 using recommendWeb.Providers;
 using MySql.Data.MySqlClient;
 using System.Collections;
-
+using recommendWeb.DataProcressers;
 
 namespace recommendWeb.Helpers
 {
@@ -257,9 +257,9 @@ namespace recommendWeb.Helpers
                 {
                     if (reader.HasRows)
                     {
-                        UserGroup userGroup = new UserGroup();
+                        Group userGroup = new Group();
                         userGroup.GroupLength = reader.GetInt32(0);
-                        userGroup.UserId = reader.GetInt32(1);
+                        userGroup.Id = reader.GetInt32(1);
 
                         groupLength.Add(userGroup);
                     }
@@ -299,10 +299,10 @@ namespace recommendWeb.Helpers
                 {
                     if (reader.HasRows)
                     {
-                        MovieGroup movieGroup = new MovieGroup();
+                        Group movieGroup = new Group();
 
                         movieGroup.GroupLength = reader.GetInt32(0);
-                        movieGroup.MovieId = reader.GetInt32(0);
+                        movieGroup.Id = reader.GetInt32(1);
 
                         groupLength.Add(movieGroup);
                     }
@@ -318,6 +318,32 @@ namespace recommendWeb.Helpers
             }
 
             return groupLength;
+        }
+
+        public static ArrayList GetTopUserGroup()
+        {
+            ArrayList topList = new ArrayList();
+            ArrayList groupList = GroupDataProcesser.GroupProcess(GetGroupLengthsByUser());
+
+            for(int i = 0; i < 20; i++)
+            {
+                topList.Add(groupList[i]);
+            }
+
+            return topList;
+        }
+
+        public static ArrayList GetTopMovieGroup()
+        {
+            ArrayList topList = new ArrayList();
+            ArrayList groupList = GroupDataProcesser.GroupProcess(GetGroupLengthsByMovie());
+
+            for(int i = 0; i < 20; i++)
+            {
+                topList.Add(groupList[i]);
+            }
+
+            return topList;
         }
     }
 }

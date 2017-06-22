@@ -121,7 +121,6 @@ namespace recommendWeb.Helpers
             return getRecommendMovie(result);
         }
 
-
         public static ArrayList getRecommend()
         {
             MySqlCommand mySqlCommand = new MySqlCommand();
@@ -168,6 +167,84 @@ namespace recommendWeb.Helpers
 
             return recommendList;
 
+        }
+
+        public static string getUserCFRecommend(int user_id)
+        {
+            string userCF = null;
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+
+            string sqlStr =
+                @"select userCF from recommender where userId = ?us_id";
+
+            mySqlCommand.CommandText = sqlStr;
+            mySqlCommand.Parameters.AddWithValue("?us_id", user_id);
+
+            mySqlCommand.Connection.Open();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        userCF = reader.GetString(0);
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Close();
+            }
+
+            return userCF;
+        }
+
+        public static string getItemCFRecommend(int user_id)
+        {
+            string itemCF = null;
+
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            mySqlCommand.Connection = DataBaseProvider.getConnection();
+
+            string sqlStr =
+                @"select itemCF from recommender where userId = ?us_id";
+
+            mySqlCommand.CommandText = sqlStr;
+            mySqlCommand.Parameters.AddWithValue("?us_id", user_id);
+
+            mySqlCommand.Connection.Open();
+
+            MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+            try
+            {
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        itemCF = reader.GetString(0);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
+            finally
+            {
+                mySqlCommand.Connection.Close();
+            }
+
+            return itemCF;
         }
 
         /// <summary>
@@ -408,5 +485,7 @@ namespace recommendWeb.Helpers
             return pyDic;
 
         }
+
+
     }
 }

@@ -1,0 +1,12 @@
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\bin\Release\DataIteraction.dll
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\bin\Release\DataIteraction.pdb
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\bin\Release\DataModel.dll
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\bin\Release\EntityFramework.dll
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\bin\Release\DataModel.pdb
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\obj\Release\DataIteraction.csprojResolveAssemblyReference.cache
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\obj\Release\DataIteraction.dll
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\obj\Release\DataIteraction.pdb
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\bin\Release\DataProcessLayer.dll
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\bin\Release\Newtonsoft.Json.dll
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\bin\Release\DataProcessLayer.pdb
+D:\projects\recommendWeb\RecommendWeb\DataIteraction\bin\Release\Newtonsoft.Json.xml
