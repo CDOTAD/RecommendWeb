@@ -1,9 +1,0 @@
-D:\projects\recommendWeb\RecommendWeb\DataModel\bin\Release\DataModel.dll.config
-D:\projects\recommendWeb\RecommendWeb\DataModel\bin\Release\DataModel.dll
-D:\projects\recommendWeb\RecommendWeb\DataModel\bin\Release\DataModel.pdb
-D:\projects\recommendWeb\RecommendWeb\DataModel\bin\Release\EntityFramework.dll
-D:\projects\recommendWeb\RecommendWeb\DataModel\bin\Release\EntityFramework.xml
-D:\projects\recommendWeb\RecommendWeb\DataModel\bin\Release\zh-Hans\EntityFramework.resources.dll
-D:\projects\recommendWeb\RecommendWeb\DataModel\obj\Release\DataModel.csprojResolveAssemblyReference.cache
-D:\projects\recommendWeb\RecommendWeb\DataModel\obj\Release\DataModel.dll
-D:\projects\recommendWeb\RecommendWeb\DataModel\obj\Release\DataModel.pdb

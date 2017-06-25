@@ -13,6 +13,7 @@ using IronPython.Runtime;
 using Microsoft.Scripting.Hosting;
 
 
+
 namespace recommendWeb.Helpers
 {
     /// <summary>
@@ -113,7 +114,7 @@ namespace recommendWeb.Helpers
 
             IronPython.Runtime.List user_item_list = getUserLikeItem(user_id);
 
-            PythonDictionary similar_matrix = getItemSimilarityMatrix(user_item_list);
+            PythonDictionary similar_matrix =getItemSimilarityMatrix(user_item_list);
 
 
             IronPython.Runtime.List result = pyScript.recommend_item_cf(user_item_list,similar_matrix,3);

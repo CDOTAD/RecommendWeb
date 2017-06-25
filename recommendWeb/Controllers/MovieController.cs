@@ -5,8 +5,7 @@ using System.Web.Http;
 using System.Collections;
 using recommendWeb.Models;
 using recommendWeb.Providers;
-using DataModel.ViewModel;
-using DataIteraction;
+using recommendWeb.Helpers;
 
 
 namespace recommendWeb.Controllers
@@ -45,7 +44,7 @@ namespace recommendWeb.Controllers
 
             try
             {
-                MovieView movie = MovieHelper.GetMovieById(id);
+                Movie movie = MovieHelper.GetMovieById(id);
                 response.Content = new StringContent(JsonObjectConverter.ObjectToJson(movie));
                 response.StatusCode = HttpStatusCode.OK;
 

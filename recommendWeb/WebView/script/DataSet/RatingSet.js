@@ -47,7 +47,7 @@
         }]
     })
 
-    $.getJSON('../../../api/Rating/GroupLenthsTopUser')
+    $.getJSON('../../../api/Rating/GroupLengthsTopUser')
         .done(function (data) {
 
             topUserChart.hideLoading();

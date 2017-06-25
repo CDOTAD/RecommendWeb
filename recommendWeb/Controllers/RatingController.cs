@@ -3,8 +3,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Collections;
-using DataIteraction;
 using recommendWeb.Providers;
+using recommendWeb.Helpers;
 
 
 namespace recommendWeb.Controllers
@@ -174,7 +174,7 @@ namespace recommendWeb.Controllers
         }
 
         [HttpGet]
-        [Route("api/Rating/GroupLenthsTopUser")]
+        [Route("api/Rating/GroupLengthsTopUser")]
         public HttpResponseMessage GetTopUserGroupLenths()
         {
             HttpResponseMessage response = new HttpResponseMessage();
@@ -201,21 +201,21 @@ namespace recommendWeb.Controllers
         public HttpResponseMessage GetTopMovieGroupLengths()
         {
             HttpResponseMessage response = new HttpResponseMessage();
-            //try
-            //{
+            try
+            {
                 ArrayList topList = RatingHelper.GetTopMovieGroup();
                 response.Content = new StringContent(JsonObjectConverter.ObjectToJson(topList));
                 response.StatusCode = HttpStatusCode.OK;
 
                 return response;
-            //}
-            //catch(Exception e)
-            //{
-            //    response.Content = new StringContent(e.StackTrace);
-            //    response.StatusCode = HttpStatusCode.NotFound;
+            }
+            catch(Exception e)
+            {
+                response.Content = new StringContent(e.Message +'\n'+e.StackTrace);
+                response.StatusCode = HttpStatusCode.NotFound;
 
-            //    return response;
-            //}
+                return response;
+            }
         }
     }
 }

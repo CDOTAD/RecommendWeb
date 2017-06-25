@@ -390,20 +390,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataIteraction\DataIteraction.csproj">
-      <Project>{88cd0c24-da70-4067-b748-693c4bb8a227}</Project>
-      <Name>DataIteraction</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataModel\DataModel.csproj">
-      <Project>{7c368362-6e84-4cdc-a9ee-c4fdfd157437}</Project>
-      <Name>DataModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataProcessLayer\DataProcessLayer.csproj">
-      <Project>{4898c48c-cdd2-496c-8825-c3c3aa8cf6cc}</Project>
-      <Name>DataProcessLayer</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="FirstComLib">
       <Guid>{5915A583-8AED-404F-9C56-4A1886CC0381}</Guid>
       <VersionMajor>1</VersionMajor>

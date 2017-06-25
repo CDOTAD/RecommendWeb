@@ -3,7 +3,6 @@ using System.Collections;
 using MySql.Data.MySqlClient;
 using recommendWeb.Providers;
 using recommendWeb.Models;
-using DataModel;
 
 namespace recommendWeb.Helpers
 {
@@ -32,8 +31,8 @@ namespace recommendWeb.Helpers
                 {
                     if (reader.HasRows)
                     {
-                        user user = new user();                        
-                        user.userId = reader.GetInt32(0);
+                        User user = new User();                        
+                        user.UserId = reader.GetInt32(0);
 
                         allUser.Add(user);
                     }

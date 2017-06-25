@@ -5,8 +5,8 @@ using System.Web.Http;
 using recommendWeb.Models;
 using recommendWeb.Providers;
 using System.Collections;
-using DataIteraction;
-using DataModel.ViewModel;
+using recommendWeb.Helpers;
+
 
 namespace recommendWeb.Controllers
 {
@@ -45,7 +45,7 @@ namespace recommendWeb.Controllers
 
             try
             {
-                UserView user = UserHelper.GetUserById(id);
+                User user = UserHelper.GetUserById(id);
                 response.Content = new StringContent(JsonObjectConverter.ObjectToJson(user));
                 response.StatusCode = HttpStatusCode.OK;
 
